@@ -3,6 +3,7 @@ const { DataApiClient } = require('rqlite-js')
 const log = require('./logger')
 
 const CACHE_HOSTS = process.env.MEDIA_CACHE_URL || ['http://bot-cache-0.bot-cache-internal.datastore.svc.cluster.local:4001', 'http://bot-cache-1.bot-cache-internal.datastore.svc.cluster.local:4001', 'http://bot-cache-2.bot-cache-internal.datastore.svc.cluster.local:4001']
+const NAME_SPACE = process.env.CACHE_NAMESPACE || process.env.NAME_SPACE || 'default'
 
 const dataApiClient = new DataApiClient(CACHE_HOSTS)
 let CACHE_READY = false
