@@ -126,10 +126,25 @@ async function getAll (key, table){
     log.error(e)
   }
 }
+async function update (id, key, value, table){
+  try{
+    if(!key  || !table || !CACHE_READY || !CACHE_TABLES[table]?.table) return
+    let sql = `UPDATE INTO "${CACHE_TABLES[table].table}" SET ${key}="${value}" WHERE id=${id}`
+    let dataResults = await dataApiClient.execute(sql)
+    if(dataResults?.hasError()){
+      log.error(dataResults?.getFirstError())
+      return
+    }
+    return dataResults?.toArray()
+  }catch(e){
+    log.error(e)
+  }
+}
 module.exports = {
   del: delCache,
   all: getAll,
   status: ()=> { return CACHE_READY },
   set: setCache,
-  get: getCache
+  get: getCache,
+  update
 }
