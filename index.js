@@ -129,7 +129,7 @@ async function getAll (key, table){
 async function update (id, key, value, table){
   try{
     if(!key  || !table || !CACHE_READY || !CACHE_TABLES[table]?.table) return
-    let sql = `UPDATE INTO "${CACHE_TABLES[table].table}" SET ${key}="${value}" WHERE id=${id}`
+    let sql = `UPDATE "${CACHE_TABLES[table].table}" SET ${key}="${value}" WHERE id=${id}`
     let dataResults = await dataApiClient.execute(sql)
     if(dataResults?.hasError()){
       log.error(dataResults?.getFirstError())
