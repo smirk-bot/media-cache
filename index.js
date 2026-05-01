@@ -96,7 +96,7 @@ async function setCache(val, table){
 }
 async function delCache(key, val, table){
   try{
-    if(!key || !table || !CACHE_READY || CACHE_TABLES[table].table) return
+    if(!key || !table || !CACHE_READY || CACHE_TABLES[table]?.table) return
 
     let sql = `DELETE FROM "${CACHE_TABLES[table].table}" WHERE ${key}="${val}"`
     let dataResults = await dataApiClient.execute(sql)
