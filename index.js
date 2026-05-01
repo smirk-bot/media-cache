@@ -12,7 +12,7 @@ const CACHE_TABLES = { yt: {}, tiktok: {}}
 
 async function createYTTable(){
   try{
-    CACHE_TABLES.yt.table = `yt_media_feeds_${NAME_SPACE}`
+    CACHE_TABLES.yt.table = `yt_feeds_${NAME_SPACE}`
     let sql = `CREATE TABLE IF NOT EXISTS "${CACHE_TABLES.yt.table}" (id TEXT PRIMARY KEY, ytChId TEXT NOT NULL, username TEXT NOT NULL, title TEXT NOT NULL, share_url TEXT NOT NULL, create_time INTEGER NOT NULL, video_description TEXT, chId TEXT, msgId TEXT, ttl INTEGER NOT NULL)`
     CACHE_TABLES.yt.all = `SELECT * FROM "${CACHE_TABLES.yt.table}" WHERE ytChId=:ytChId`
     CACHE_TABLES.yt.set = `INSERT OR REPLACE INTO "${CACHE_TABLES.yt.table}" (id, ytChId, username, title, share_url, create_time, video_description, chId, msgId, ttl) VALUES(:id, :ytChId, :username, :title, :share_url, :create_time, :video_description, :chId, :msgId, :ttl)`
@@ -30,7 +30,7 @@ async function createYTTable(){
 }
 async function createTikTokTable(){
   try{
-    CACHE_TABLES.tiktok.table = `tiktok_media_feeds_${NAME_SPACE}`
+    CACHE_TABLES.tiktok.table = `tiktok_feeds_${NAME_SPACE}`
     let sql = `CREATE TABLE IF NOT EXISTS "${CACHE_TABLES.tiktok.table}" (id TEXT PRIMARY KEY, open_id TEXT NOT NULL, username TEXT NOT NULL, title TEXT NOT NULL, share_url TEXT NOT NULL, create_time INTEGER NOT NULL, video_description TEXT, like_count INTEGER, view_count INTEGER, chId TEXT, msgId TEXT, ttl INTEGER NOT NULL)`
     CACHE_TABLES.tiktok.all = `SELECT * FROM "${CACHE_TABLES.tiktok.table}" WHERE open_id=:open_id`
     CACHE_TABLES.tiktok.set = `INSERT OR REPLACE INTO "${CACHE_TABLES.tiktok.table}" (id, open_id, username, title, share_url, create_time, video_description, like_count, view_count, chId, msgId, ttl) VALUES(:id, :open_id, :username, :title, :share_url, :create_time, :video_description, :like_count, :view_count, :chId, :msgId, :ttl)`
